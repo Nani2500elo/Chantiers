@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carte de Mes Chantiers</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        #map {
+            width: 100%;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+    <h1>Carte de Mes Chantiers</h1>
+    <div id="map"></div>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // Initialisation de la carte
+        var map = L.map('map').setView([43.5, 2.5], 6); // Vue centrée sur la France
+
+        // Ajouter une couche de tuiles (carte)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Liste des chantiers
+        var chantiers = [
+            { name: "McDonald's Cazeres", lat: 43.23648, lng: 1.0756, description: "2 Bornes IRVE de 180kW, avec un PDL de 250KVA pour permettre la recharge de 4 voitures simultanément.", photos: "photos/Mcdonalds_Cazeres.jpg" },
+            { name: "McDonald's Port Leucate", lat: 42.84132, lng: 3.03826, description: "1 Bornes IRVE de 180kW, avec un PDL de 250KVA pour permettre la recharge de 4 voitures simultanément.", photos: "photos/Mcdonalds_Port_Leucate.jpg" },
+            { name: "McDonald's Sigean", lat: 42.76053, lng: 2.97349, description: "1 Bornes IRVE de 180kW, avec un PDL de 250KVA pour permettre la recharge de 4 voitures simultanément.", photos: "photos/Mcdonalds_Sigean.jpg" },
+            { name: "McDonald's Lezignan", lat: 43.18754, lng: 2.75074, description: "1 Bornes IRVE de 180kW, avec un PDL de 250KVA pour permettre la recharge de 4 voitures simultanément.", photos: "photos/Mcdonalds_Lezignan.jpg" },
+            { name: "McDonald's Thuir", lat: 42.64033, lng: 2.76278, description: "2 Bornes IRVE de 180kW, avec un PDL de 250KVA pour permettre la recharge de 4 voitures simultanément.", photos: "photos/Mcdonalds_Thuir.jpg" },
+            { name: "McDonald's Castanet", lat: 43.51994, lng: 1.49669, description: "1 Bornes IRVE de 180kW, avec un PDL de 250KVA pour permettre la recharge de 4 voitures simultanément.", photos: "photos/Mcdonalds_Castanet.jpg" },
+            { name: "McDonald's Cahors", lat: 44.46691, lng: 1.42763, description: "1 Bornes IRVE de 180kW, avec un PDL de 250KVA pour permettre la recharge de 4 voitures simultanément.", photos: "photos/Mcdonalds_Cahors.jpg" }
+        ];
+
+        // Ajouter les marqueurs sur la carte
+        chantiers.forEach(chantier => {
+            var marker = L.marker([chantier.lat, chantier.lng]).addTo(map);
+            marker.bindPopup(`
+                <b>${chantier.name}</b><br>
+                ${chantier.description}<br>
+                <img src="${chantier.photos}" alt="${chantier.name}" style="width: 100px; height: auto;">
+            `);
+        });
+    </script>
+</body>
+</html>
